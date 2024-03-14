@@ -6,7 +6,7 @@ The software consists of a command-line interface where users can choose from va
 
 There are two purposes in creating this software. I wish to master the basic programming concepts by implementing real-world functionality in Kotlin. And also, I intend to enhance my understanding of data management in this language. Through this project, I strive to build confidence in my abilities to apply fundamentals of programming.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://app.vidcast.io/share/7c2e63c7-0b98-47c1-a692-340d6562ebb3)
 
 # Development Environment
 
@@ -16,6 +16,5 @@ The program was written in Kotlin programming language.
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
 * [YouTube](https://www.youtube.com/watch?v=F9UC9DY-vIU)
 * [Codecademy](https://www.codecademy.com/learn/learn-kotlin)
