@@ -4,27 +4,30 @@ import java.io.FileReader
 import java.io.FileWriter
 import java.io.File
 import java.security.MessageDigest
+import java.io.*
+
+class User(val username: String, val password: String)
 
 fun main() {
     //initialize a list of usernames and passwords
     val list = listOf(
-        Pair("jessicalindsey93@gmail.com", "Password123"),
-        Pair("michaelthomas84@yahoo.com", "SecurePassword1"),
-        Pair("sophialee77@hotmail.com", "Passw0rd!"),
-        Pair("davidwilson65@gmail.com", "Secret123"),
-        Pair("emilyroberts88@yahoo.com", "P@ssw0rd"),
-        Pair("ryanjohnson79@hotmail.com", "Password!"),
-        Pair("oliviasmith99@gmail.com", "Password1234"),
-        Pair("ethanbrown71@yahoo.com", "SecurePassword!"),
-        Pair("avaanderson92@hotmail.com", "Passw0rd123"),
-        Pair("williammartinez83@gmail.com", "Secure123")
+        User("jessicalindsey93@gmail.com", "Password123"),
+        User("michaelthomas84@yahoo.com", "SecurePassword1"),
+        User("sophialee77@hotmail.com", "Passw0rd!"),
+        User("davidwilson65@gmail.com", "Secret123"),
+        User("emilyroberts88@yahoo.com", "P@ssw0rd"),
+        User("ryanjohnson79@hotmail.com", "Password!"),
+        User("oliviasmith99@gmail.com", "Password1234"),
+        User("ethanbrown71@yahoo.com", "SecurePassword!"),
+        User("avaanderson92@hotmail.com", "Passw0rd123"),
+        User("williammartinez83@gmail.com", "Secure123")
     )
     //add the list to the passwords.txt file
     writeFile(list)
 
     while (true)
     {
-        //display the meny
+        //display the menu
         println("Choose an option: ")
         println("1. Login")
         println("2. Generate Random Password")
@@ -46,14 +49,16 @@ fun main() {
         }
     }
 }
-fun writeFile(list: List<Pair<String, String>>) {
-    //write teh list of usernames and passwords to the .txt file
+
+fun writeFile(list: List<User>) {
+    //write the list of usernames and passwords to the .txt file
     BufferedWriter(FileWriter("passwords.txt")).use { writer ->
-        list.forEach { (username, password) ->
-            writer.write("$username,${encryptPassword(password)}\n")
+        list.forEach { user ->
+            writer.write("${user.username},${encryptPassword(user.password)}\n")
         }
     }
 }
+
 fun getUsername(): String {
     var username = ""
 
@@ -85,12 +90,12 @@ fun appendFile() {
 
     //append the new username and password to the .txt file
     BufferedWriter(FileWriter("passwords.txt", true)).use { writer ->
-            writer.append("$username,${password?.let { encryptPassword(it) }}\n")
-        }
+        writer.append("$username,${password?.let { encryptPassword(it) }}\n")
+    }
 }
 
 fun changePassword() {
-    var list = mutableListOf<Pair<String, String>>()
+    var list = mutableListOf<User>()
     println("Please enter your username: ")
     val userUsername = readLine()
     BufferedReader(FileReader("passwords.txt")).use { reader ->
@@ -103,13 +108,13 @@ fun changePassword() {
                 if (userPassword?.let { encryptPassword(it) } == password) {
                     println("Password correct. ")
                     val newPassword = getPassword()
-                    list.add(Pair(username, newPassword))
+                    list.add(User(username, newPassword))
                     println("Successfully changed the password!")
                 } else {
                     println("Incorrect password")
                 }
             } else {
-                list.add(Pair(username, password))
+                list.add(User(username, password))
             }
             line = reader.readLine()
         }
